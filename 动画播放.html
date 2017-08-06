@@ -37,7 +37,7 @@
             text-align: center;
             line-height: 60px;
             opacity: .6;
-            alpha:( opacity = 60);
+            filter:alpha( opacity = 60);
             text-shadow: 1px 1px 2px gray;
             position: absolute;
             bottom: 160px;
@@ -53,32 +53,26 @@
             transform: scale(1.5);
             color: #fff;
             opacity: .8;
-            transition-delay: 50ms;
-            transition-duration: 100ms;
-            transition-timing-function: linear;
             z-index: 1;
         }
         #mask{
             width: 600px;
             height: 375px;
-            opacity: 0;
             position: absolute;
             top: 21px;
             left: 21px;
         }
-        #mask:hover{
-            opacity: .6;
-            transition-delay: 200ms;
-            transition-duration: 200ms;
-            transition-timing-function: ease;
+        #mask:hover .content{
+            background: rgba( 150, 200, 100,0.6);
+            display: block;
         }
-
         .content{
-            background: rgba( 150, 200, 100,0.5);
+            background: rgba( 150, 200, 100,0);
             width: 300px;
             height: 375px;
             cursor: default;
             position: relative;
+            display: none;
         }
         .content span{
             width: 280px;
@@ -127,46 +121,43 @@
     </style>
 </head>
 <body>
-    <div id="container">
-        <div id="img">
-            <img src="images/1.jpg" alt="" class="selected"/>
-            <div id="mask">
-                <div class="content">
-                    <span>冰上的尤里</span>
-                    <p>《YURI!!! on ICE》是MAPPA以花样滑冰为题材制作的日本原创电视动画作品，于2016年10月6日开始播出。全12话。
-                        标题上的“YURI”指的是两个角色的名字，勇利和尤里（日语读音相同）</p>
-                    <a href="www.baidu.com"><button>查看更多</button></a>
-                </div>
+<div id="container">
+    <div id="img">
+        <img src="images/1.jpg" alt="" class="selected"/>
+        <div id="mask">
+            <div class="content">
+                <span>冰上的尤里</span>
+                <p>《YURI!!! on ICE》是MAPPA以花样滑冰为题材制作的日本原创电视动画作品，于2016年10月6日开始播出。全12话。
+                    标题上的“YURI”指的是两个角色的名字，勇利和尤里（日语读音相同）</p>
+                <a href="www.baidu.com"><button>查看更多</button></a>
             </div>
-            <img src="images/2.jpg" alt=""/>
-            <img src="images/3.jpg" alt=""/>
-            <img src="images/4.jpg" alt=""/>
         </div>
-        <div id="left" class="arrow">&lt;</div>
-        <div id="right" class="arrow">&gt;</div>
+        <img src="images/2.jpg" alt=""/>
+        <img src="images/3.jpg" alt=""/>
+        <img src="images/4.jpg" alt=""/>
     </div>
-    <script>
-        var oLeft = document.getElementById("left");
-        var oRight = document.getElementById("right");
-        var oImg = document.getElementById("img");
-        var aImg = oImg.getElementsByTagName("img");
-        var nowIndex = 0;
-//        for( var i = 0 ; i < aImg.length ; i ++ ){
-//          aImg[i].index = i;
-//        };
-        oLeft.onclick = oRight.onclick = function(){
-            if( this === oLeft ){
-                nowIndex--;
-                if( nowIndex == -1) nowIndex = aImg.length - 1;
-            }else{
-                nowIndex++;
-                if( nowIndex == aImg.length) nowIndex = 0;
-            };
-            for( var i = 0 ;i < aImg.length ; i++){
-                aImg[i].className = "";
-            };
-            aImg[nowIndex].className = "selected";
+    <div id="left" class="arrow">&lt;</div>
+    <div id="right" class="arrow">&gt;</div>
+</div>
+<script>
+    var oLeft = document.getElementById("left");
+    var oRight = document.getElementById("right");
+    var oImg = document.getElementById("img");
+    var aImg = oImg.getElementsByTagName("img");
+    var nowIndex = 0;
+    oLeft.onclick = oRight.onclick = function(){
+        if( this === oLeft ){
+            nowIndex--;
+            if( nowIndex == -1) nowIndex = aImg.length - 1;
+        }else{
+            nowIndex++;
+            if( nowIndex == aImg.length) nowIndex = 0;
         };
-    </script>
+        for( var i = 0 ;i < aImg.length ; i++){
+            aImg[i].className = "";
+        };
+        aImg[nowIndex].className = "selected";
+    };
+</script>
 </body>
 </html>
